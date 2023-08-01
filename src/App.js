@@ -1,25 +1,50 @@
-import logo from './logo.svg';
+import { Box, Button, Grommet, Nav } from 'grommet'
+import { RouterProvider, Outlet, createBrowserRouter } from 'react-router-dom'
+import { Footy, Main, Navbar, Registration, Success } from './components/index';
+import { useAuth } from './useAuth'
+import supabaseClient from './supabaseClient';
 import './App.css';
+import { useEffect, useState } from 'react';
+import { ThemeSupa } from '@supabase/auth-ui-shared'
+import { Auth } from '@supabase/auth-ui-react'
+import { AuthProvider } from './useAuth'
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        path: "",
+        element: <Main />
+      },
+      {
+        path: "success",
+        element: <Success />
+      },
+      {
+        path: "registration",
+        element: <Registration />
+      }
+    ]
+  }
+])
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return <RouterProvider router={router} />
 }
 
 export default App;
+
+function Layout () {
+  //const auth = useAuth()
+  return (
+    <Grommet>
+      <AuthProvider>
+        <Navbar/>
+        <Outlet />
+        <Footy />
+      </AuthProvider>
+    </Grommet>
+  )
+}
