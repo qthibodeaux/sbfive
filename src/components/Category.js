@@ -108,19 +108,9 @@ const sim = [{a:'1'},{a:'2'},{a:'3'}]
 function ThreadList () {
     return (
         <Box>
-            <List data={stickyData} margin='none'>
-                {(thread) => (
-                    <ThreadRow image={thread.image} threadTitle={thread.threadTitle} op={thread.op} lastPost={thread.lastPost} postCount={thread.postCount}/>
-                )}
-            </List>
-            <List data={sim}>
-                {(datum) => (
-                    <Box
-                        border
-                        margin='0'
-                    >{datum.a}</Box>
-                )}
-            </List>
+            {data.map((data, key) => (
+                <ThreadRow key={key} image={data.image} threadTitle={data.threadTitle} op={data.op} lastPost={data.lastPost} postCount={data.postCount}/>
+            ))}
         </Box>
     ) 
 }
