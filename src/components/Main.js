@@ -1,6 +1,6 @@
 import { Box, Image, Heading, Paragraph, Stack, Text } from "grommet"
 import { Article, Chat, ChatOption, Gamepad, Music, Run } from "grommet-icons"
-import Category from "./Category"
+import Thread from "./Thread"
 import { useAuth } from "../useAuth"
 
 function Main() {
@@ -68,9 +68,8 @@ function Main() {
             alignSelf="center"
             justify="center"
             width='xlarge'
-            border
           >
-            <Category />
+            <Thread />
           </Box>
         </Box>
       </Box>
