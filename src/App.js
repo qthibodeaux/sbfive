@@ -1,13 +1,8 @@
-import { Box, Button, Grommet, Nav } from 'grommet'
+import { Grommet } from 'grommet'
 import { RouterProvider, Outlet, createBrowserRouter } from 'react-router-dom'
-import { Footy, Main, Navbar, Registration, Success } from './components/index';
-import { useAuth } from './useAuth'
-import supabaseClient from './supabaseClient';
+import { AllPosts, Category, Footy, Main, Navbar, Registration, Success } from './components/index';
 import './App.css';
-import { useEffect, useState } from 'react';
-import { ThemeSupa } from '@supabase/auth-ui-shared'
-import { Auth } from '@supabase/auth-ui-react'
-import { AuthProvider } from './useAuth'
+import { AuthProvider } from './useAuth';
 
 const router = createBrowserRouter([
   {
@@ -16,7 +11,17 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Main />
+        element: <Main />,
+        children: [
+          {
+            path: "category",
+            element: <Category />,
+          },
+          {
+            path: ":pageNumber",
+            element: <AllPosts />,
+          },
+        ]
       },
       {
         path: "success",
@@ -37,7 +42,6 @@ function App() {
 export default App;
 
 function Layout () {
-  //const auth = useAuth()
   return (
     <Grommet>
       <AuthProvider>

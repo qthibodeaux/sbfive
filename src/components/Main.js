@@ -1,12 +1,10 @@
-import { Box, Image, Heading, Paragraph, Stack, Text } from "grommet"
-import { Article, Chat, ChatOption, Gamepad, Music, Run } from "grommet-icons"
-import Thread from "./Thread"
+import { Box, Image, Heading, Text } from "grommet"
 import { useAuth } from "../useAuth"
 
 function Main() {
   const { sess } = useAuth()
 
-  if (sess) {
+  if (!sess) {
     return (
       <Box
         border
@@ -69,7 +67,7 @@ function Main() {
             justify="center"
             width='xlarge'
           >
-            <Thread />
+            1
           </Box>
         </Box>
       </Box>
@@ -156,5 +154,6 @@ function Sect () {
     </Box>
   )
 }
+
 
 export default Main

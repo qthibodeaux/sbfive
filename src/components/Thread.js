@@ -1,5 +1,5 @@
 import { Box, Image, Paragraph, Text } from 'grommet'
-import { Share, ShareOption } from 'grommet-icons'
+import { ShareOption } from 'grommet-icons'
 
 function Thread() {
   return (
