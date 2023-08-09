@@ -3,6 +3,10 @@ import { RouterProvider, Outlet, createBrowserRouter } from 'react-router-dom'
 import { AllPosts, Category, Footy, Main, Navbar, Registration, Success } from './components/index';
 import './App.css';
 import { AuthProvider } from './useAuth';
+import Tfour from './components/test/tfour';
+import Tone from './components/test/tone';
+import Ttwo from './components/test/ttwo';
+import Tthree from './components/test/tthree';
 
 const router = createBrowserRouter([
   {
