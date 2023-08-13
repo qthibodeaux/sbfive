@@ -1,7 +1,9 @@
+import { useParams } from 'react-router-dom'
 import { Box, Image, List, Text } from 'grommet'
 import { CaretDownFill, CaretUpFill } from 'grommet-icons'
 
 function Category() {
+    const { category } = useParams()
   return (
     <Box direction='column'>
         <Box>Image | Category Name</Box>
@@ -12,7 +14,7 @@ function Category() {
                 <ThreadRowOG />
             </Box>
             <Box>
-                Threads
+                Threads { category }
                 <ThreadList />
             </Box>
         </Box>

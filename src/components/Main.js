@@ -4,7 +4,7 @@ import { useAuth } from "../useAuth"
 function Main() {
   const { sess } = useAuth()
 
-  if (!sess) {
+  if (sess) {
     return (
       <Box
         border
