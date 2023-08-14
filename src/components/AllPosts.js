@@ -1,10 +1,12 @@
-function AllPosts() {
+import { useParams } from "react-router-dom"
 
-        return (
-            <div>
-                AllPosts
-            </div>
-          )
+function AllPosts() {
+    const { allpost, category } = useParams()
+    return (
+        <div>
+            AllPosts {allpost} {category}
+        </div>
+        )
 }
 
 export default AllPosts

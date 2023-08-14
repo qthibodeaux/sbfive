@@ -1,6 +1,6 @@
 import { Grommet } from 'grommet'
 import { RouterProvider, Outlet, createBrowserRouter } from 'react-router-dom'
-import { AllPosts, Category, Footy, Main, Navbar, Registration, Success } from './components/index';
+import { Category, Footy, Main, Navbar, Profile, Registration, Success, Thread } from './components/index';
 import './App.css';
 import { AuthProvider } from './useAuth';
 
@@ -21,8 +21,8 @@ const router = createBrowserRouter([
             element: <Category />,  
           },
           {
-          path: "allpost",
-          element: <AllPosts />,  
+          path: ":allpost",
+          element: <Thread />,  
           }
         ]
       },
@@ -33,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "registration",
         element: <Registration />
+      },
+      {
+        path: "profile",
+        element: <Profile />
       }
     ]
   }
