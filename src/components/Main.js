@@ -1,40 +1,13 @@
 import { Box, Image, Heading, Text } from "grommet"
 import { useAuth } from "../useAuth"
+import LoggedOut from "./LoggedOut"
 
 function Main() {
   const { sess } = useAuth()
 
-  if (sess) {
+  if (!sess) {
     return (
-      <Box
-        border
-      >
-        <Box
-          align="center"
-          alignSelf="center"
-          justify="center"
-          width='xlarge'
-        >
-          Not Logged In
-          <Box
-            height='xsmall'
-            width='100%'
-            style={{ background: "linear-gradient(to bottom right, #342628, #FEAA00 90%)" }}
-          >
-            <Box border justify="center" flex pad='medium'>
-              <Heading color='white' >
-                Beyhive
-              </Heading>
-            </Box>
-          </Box>
-          <Heading>
-            Join The Conversation
-          </Heading>
-          <Heading>
-            Todo: add anchor tags to click categories, pics, and titles
-          </Heading>
-        </Box>
-      </Box>
+      <LoggedOut />
     )
   } else {
     return (
