@@ -1,23 +1,38 @@
+import { useParams } from 'react-router-dom'
 import { Box, Image, Paragraph, Text } from 'grommet'
 import { ShareOption } from 'grommet-icons'
 
 function Thread() {
+  const { category, allpost } = useParams()
   return (
-    <Box direction='column' fill='horizontal'>
-        <Box>Thread Title</Box>
-        <Box>Categories breadcrumbs</Box>
-        <Box>Pagination</Box>
-        <Box>
-            <PostOG />
-        </Box>
-        <Box>
-          {data.map((item, index) => (
-            <Box key={index}>
-              {index}
-              <Post  item={item}/>
-            </Box>
-          ))}
-        </Box>
+    <Box
+      border
+      background='light-3'
+    >
+      <Box
+        direction='column'
+        width='xlarge'
+        alignSelf='center'
+      >
+          <Box>Thread {category} asfd{allpost}</Box>
+          <Box>Categories breadcrumbs</Box>
+          <Box>Pagination</Box>
+          <Box>Todo: Banner | Breadcrumbs | Pagination | reply box </Box>
+          <Box>
+              <PostOG />
+          </Box>
+          <Box>
+            {data.map((item, index) => (
+              <Box key={index}>
+                {index}
+                <Post  item={item}/>
+              </Box>
+            ))}
+          </Box>
+          <Box>
+            Respond box
+          </Box>
+      </Box>
     </Box>
   )
 }

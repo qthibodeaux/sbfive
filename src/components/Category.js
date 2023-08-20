@@ -1,21 +1,41 @@
 import { useParams } from 'react-router-dom'
-import { Box, Image, List, Text } from 'grommet'
+import { Box, Button, Heading, Image, Text } from 'grommet'
 import { CaretDownFill, CaretUpFill } from 'grommet-icons'
 
 function Category() {
     const { category } = useParams()
   return (
-    <Box direction='column'>
-        <Box>Image | Category Name</Box>
+    <Box
+
+    >
         <Box
             direction='column'
+            width='xlarge'
+            alignSelf='center'
         >
             <Box>
-                <ThreadRowOG />
+                Banner
+                <Heading>{category}</Heading>
             </Box>
-            <Box>
-                Threads { category }
-                <ThreadList />
+            <Box
+                direction='column'
+                border
+            >
+                <Box>
+                    Sticky Threads
+                    <ThreadRowOG />
+                </Box>
+                <Box>
+                    <Box
+                        justify='between'
+                        direction='row'
+                        pad={{ horizontal: 'small', vertical: 'small' }}
+                     >
+                        <Text textAlign='center'>Threads { category }</Text>
+                        <Button primary label='New Thread'/>
+                    </Box>
+                    <ThreadList />
+                </Box>
             </Box>
         </Box>
     </Box>
@@ -109,7 +129,9 @@ const sim = [{a:'1'},{a:'2'},{a:'3'}]
 
 function ThreadList () {
     return (
-        <Box>
+        <Box
+            border
+        >
             {data.map((data, key) => (
                 <ThreadRow key={key} image={data.image} threadTitle={data.threadTitle} op={data.op} lastPost={data.lastPost} postCount={data.postCount}/>
             ))}
@@ -122,34 +144,42 @@ function ThreadRow ({image, threadTitle, op, lastPost, postCount}) {
         <Box 
             background='brand'
             direction='row'
-            pad='small'
-            gap='small'
+            justify='between'
+            border
         >
             <Box
-                height='2.5rem'
-                width='2.5rem'
+                direction='row'
+                pad='small'
+                gap='small'
             >
-                <Image 
-                    fit='contain'
-                    src={image}
-                />
-            </Box>
-            <Box
-                direction='column'
-            >
-                <Box>
-                    <Text size='small' weight='bold'>{threadTitle}</Text>
+                <Box
+                    height='2.5rem'
+                    width='2.5rem'
+                >
+                    <Image 
+                        fit='contain'
+                        src={image}
+                    />
                 </Box>
                 <Box
-                    direction='row'
+                    direction='column'
                 >
-                    <Box><Text size='small'>{op}</Text></Box>
-                    <Box><Text size='small'>{lastPost}</Text></Box>
-                    <Box><Text size='small'>{postCount}</Text></Box>
+                    <Box>
+                        <Text size='small' weight='bold'>{threadTitle}</Text>
+                    </Box>
+                    <Box
+                        direction='row'
+                    >
+                        <Box><Text size='small'>{op}</Text></Box>
+                        <Box><Text size='small'>{lastPost}</Text></Box>
+                        <Box><Text size='small'>{postCount}</Text></Box>
+                    </Box>
                 </Box>
             </Box>
             <Box
                 direction='row'
+                align='center'
+                pad='small'
             >
                 <Box><CaretUpFill /></Box>
                 <Box><CaretDownFill /></Box>
