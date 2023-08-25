@@ -3,8 +3,15 @@ import { Box } from 'grommet'
 
 function Profile() {
   return (
-    <Box>
-        Profile
+    <Box
+      fill
+      direction='column'
+    >
+        <Box>
+          Image
+          Title
+          Name
+        </Box>
     </Box>
   )
 }
