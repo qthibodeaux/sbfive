@@ -1,6 +1,8 @@
+import { useState } from "react";
+import { useAuth } from "../useAuth"
 import { redirect, useNavigate } from "react-router-dom"
 import supabaseClient from "../supabaseClient"
-import { Box, Button, Form, FormField, Heading, Paragraph } from "grommet"
+import { Box, Button, Form, FormField, Heading, Paragraph, TextInput  } from "grommet"
 
 export async function welcomeLoader () {
   const {
@@ -20,21 +22,67 @@ export async function welcomeLoader () {
 }
 
 function Success () {
+  const sess = useAuth()
+  const navigate = useNavigate()
+  const [username, setUsername] = useState("")
+  const [serverError, setServerError] = useState("")
+  const [formIsDirty, setFormIsDirty] = useState(false)
+
   return (
-    <Box>
-      <Heading>Welcome to Beyhive</Heading>
-      <Paragraph>
-        Let's get started by creating a username:
-      </Paragraph>
-      <Form>
-        <FormField>
-          Username
-        </FormField>
-        <Paragraph>
-          This is the namepeope will see you as on the message board
+    <Box
+      border
+      fill
+      justify='center'
+      align='center'
+      pad='medium'
+    >
+      <Box
+        width='large'
+        gap='medium'
+      >
+        <Heading>Welcome to Beyhive</Heading>
+        <Paragraph margin={{ vertical: 'small' }}>
+          Let's get started by creating a username:
         </Paragraph>
-        <Button label="Submit"/>
-      </Form>
+        <Form
+          onSubmit={(event) => {
+            event.preventDefault();
+            supabaseClient
+              .from("user_profiles")
+              .insert([
+                {
+                  user_id: sess.session?.user.id || "",
+                  username: username
+                }
+              ])
+              .then(({ error }) => {
+                if (error) {
+                  setServerError(`Username "${username}" is already taken`);
+                } else {
+                  const target = localStorage.getItem("returnPath") || "/";
+                  localStorage.remoteItem("returnPath");
+                  navigate(target)
+                }
+              })
+          }}
+        >
+          <FormField width='medium'>
+            <TextInput  
+              placeholder='Username'
+              value={username}
+              onChange={event => setUsername(event.target.value)}
+            />
+          </FormField>
+          <Paragraph margin={{ vertical: 'small' }}>
+            This is the namepeope will see you as on the message board
+          </Paragraph>
+          <Button margin={{ vertical: 'small' }} label="Submit"/>
+        </Form>
+
+        <Box>
+          {username}
+        </Box>
+      </Box>
     </Box>
   )
 }

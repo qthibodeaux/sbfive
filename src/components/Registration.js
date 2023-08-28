@@ -17,7 +17,6 @@ function Registration() {
 
   useEffect(() => {
     if (sess?.user) {
-        console.log('worky?')
         navigate("../")
     }
   }, [sess])

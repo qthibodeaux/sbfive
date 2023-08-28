@@ -49,8 +49,7 @@ export function useAuth () {
       if (data?.[0]) {
         setProfile(data?.[0])
       } else {
-        //navigate("/success")
-        console.log("Success")
+        navigate("/success")
       }
 
       return supabaseClient
