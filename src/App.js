@@ -3,6 +3,7 @@ import { RouterProvider, Outlet, createBrowserRouter } from 'react-router-dom'
 import { Category, Footy, Main, Navbar, Profile, Registration, Success, Thread } from './components/index';
 import './App.css';
 import { AuthProvider } from './useAuth';
+import { welcomeLoader } from './components/Success';
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,8 @@ const router = createBrowserRouter([
       },
       {
         path: "success",
-        element: <Success />
+        element: <Success />,
+        loader: welcomeLoader,
       },
       {
         path: "registration",

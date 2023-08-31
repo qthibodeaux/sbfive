@@ -4,22 +4,33 @@ import { redirect, useNavigate } from "react-router-dom"
 import supabaseClient from "../supabaseClient"
 import { Box, Button, Form, FormField, Heading, Paragraph, TextInput  } from "grommet"
 
-export async function welcomeLoader () {
+export async function welcomeLoader() {
   const {
-    data: { user }
+    data: { user },
   } = await supabaseClient.auth.getUser();
+
   if (!user) {
     return redirect("/");
   }
-  const { data }   = await supabaseClient
+
+  const { data } = await supabaseClient
     .from("user_profiles")
     .select("*")
     .eq("user_id", user?.id)
     .single()
+
+  if (data) {
+    return redirect("/");
+  }
+
   if (data?.username) {
     return redirect("/");
   }
+
+  return () => {console.log("data")}
 }
+
+
 
 function Success () {
   const sess = useAuth()
@@ -51,7 +62,7 @@ function Success () {
               .from("user_profiles")
               .insert([
                 {
-                  user_id: sess.session?.user.id || "",
+                  user_id: sess.sess?.user.id || "",
                   username: username
                 }
               ])
@@ -60,7 +71,7 @@ function Success () {
                   setServerError(`Username "${username}" is already taken`);
                 } else {
                   const target = localStorage.getItem("returnPath") || "/";
-                  localStorage.remoteItem("returnPath");
+                  localStorage.removeItem("returnPath")
                   navigate(target)
                 }
               })
@@ -76,7 +87,7 @@ function Success () {
           <Paragraph margin={{ vertical: 'small' }}>
             This is the namepeope will see you as on the message board
           </Paragraph>
-          <Button margin={{ vertical: 'small' }} label="Submit"/>
+          <Button type='submit' margin={{ vertical: 'small' }} label="Submit"/>
         </Form>
 
         <Box>
