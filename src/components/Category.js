@@ -1,9 +1,38 @@
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Box, Button, Heading, Image, Text } from 'grommet'
 import { CaretDownFill, CaretUpFill } from 'grommet-icons'
+import supabaseClient from '../supabaseClient'
 
 function Category() {
     const { category } = useParams()
+
+    useEffect(() => {
+        const queryPageNumber = category ? +category : 1;
+        supabaseClient
+            .rpc("get_post", { page_numbe: queryPageNumber})
+            .select("*")
+            .then(({ data }) => {
+                setPosts(data as GetPostsResponse[]);
+                if (session?.user) {
+                  supaClient
+                    .from("post_votes")
+                    .select("*")
+                    .eq("user_id", session.user.id)
+                    .then(({ data: votesData }) => {
+                      if (!votesData) {
+                        return;
+                      }
+                      const votes = votesData.reduce((acc, vote) => {
+                        acc[vote.post_id] = vote.vote_type as any;
+                        return acc;
+                      }, {} as Record<string, "up" | "down" | undefined>);
+                      setMyVotes(votes);
+                    });
+                }
+              });
+    }, [session, bumper, pageNumber])
+
   return (
     <Box
 
