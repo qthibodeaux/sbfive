@@ -5,7 +5,20 @@ create table user_profiles (
   CONSTRAINT username_length CHECK (char_length(username) > 3 and char_length(username) < 15)
 );
 
+create table categories (
+  category_id uuid primary key,
+  category text unique not null
+);
+
+create table threads (
+  thread_id uuid primary key,
+  threat_title text unique not null
+);
+
 alter table user_profiles enable row level security;
+
+alter table threads
+  add column category_id text references categories;
 
 CREATE POLICY "all can see" ON "public"."user_profiles"
 AS PERMISSIVE FOR SELECT

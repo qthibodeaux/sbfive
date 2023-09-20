@@ -1,6 +1,30 @@
+import { useState } from "react"
 import { Box, Image, Heading, Text, Button } from "grommet"
+import supabaseClient from "../supabaseClient"
 
 function LoggedIn() {
+  const [info, setInfo] = useState([])
+  const [loading, setLoading] = useState(false)
+
+  async function getData () {
+    setLoading(true)
+    
+    try {
+      const {data, error} = await supabaseClient
+      .from('user_profiles')
+      .select('*')
+    if (error) {
+      throw error
+    }
+
+    setInfo(data)
+    } catch (error) {
+      console.error('Error fetching user profiles', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <Box
         border
@@ -31,7 +55,21 @@ function LoggedIn() {
             justify="center"
             width='xlarge'
           >
-            1
+            1 asfd
+            <Box>
+              Data from supabase
+              {loading && <Box>Loading...</Box>}
+              <ul>
+                {info.map((profile, index) => (
+                  <li key={index}>
+                    {profile.username}
+                  </li>
+                ))}
+              </ul>
+            </Box>
+            <Box>
+              <Button primary disabled={loading} label='Get Data' onClick={getData}/>
+            </Box>
           </Box>
         </Box>
       </Box>
