@@ -28,7 +28,7 @@ create table threads (
 
 create table thre (
   id uuid primary key,
-  thread_title text unique not null,
+  thread_title text not null,
   category_id uuid not null references categories,
   up_id uuid not null references up
 );
@@ -36,8 +36,8 @@ create table thre (
 create table posts (
   id uuid primary key,
   content varchar(1000),
-  thread_id uuid not null references threads,
-  user_id uuid not null references user_profiles
+  thre_id uuid not null references thre,
+  up_id uuid not null references up
 );
 
 alter table user_profiles enable row level security;
