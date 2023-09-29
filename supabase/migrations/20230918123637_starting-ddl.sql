@@ -23,21 +23,37 @@ create table threads (
   id uuid primary key,
   thread_title text unique not null,
   category_id uuid not null references categories,
-  user_id uuid not null references user_profiles
+  user_id uuid not null references user_profiles,
+  created_at timestamp not null
+  
 );
 
 create table thre (
   id uuid primary key,
   thread_title text not null,
   category_id uuid not null references categories,
-  up_id uuid not null references up
+  up_id uuid not null references up,
+  created_at timestamp not null,
+  updated_at timestamp
 );
 
 create table posts (
   id uuid primary key,
   content varchar(1000),
   thre_id uuid not null references thre,
-  up_id uuid not null references up
+  up_id uuid not null references up,
+  created_at timestamp not null
+  
+);
+
+create table hot (
+  id uuid primary key,
+  thread_title text not null,
+  category_id uuid not null references categories,
+  up_id uuid not null references up,
+  created_at timestamp not null
+  
+
 );
 
 alter table user_profiles enable row level security;
