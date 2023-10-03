@@ -42,8 +42,8 @@ create table posts (
   content varchar(1000),
   thre_id uuid not null references thre,
   up_id uuid not null references up,
-  created_at timestamp not null
-  
+  created_at timestamp not null,
+  updated_at timestamp
 );
 
 create table hot (
