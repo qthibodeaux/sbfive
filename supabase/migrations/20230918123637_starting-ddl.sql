@@ -48,12 +48,7 @@ create table posts (
 
 create table hot (
   id uuid primary key,
-  thread_title text not null,
-  category_id uuid not null references categories,
-  up_id uuid not null references up,
-  created_at timestamp not null
-  
-
+  thre_id uuid not null references thre
 );
 
 alter table user_profiles enable row level security;
