@@ -1,9 +1,0 @@
-.bl {
-  background-image: url('../assets/sza.jpg');
-}
-
-.ne {
-  background-color: rgba(0,0,0,0.8);
-  padding: 1rem;
-  backdrop-filter: blur(10px);
-}
