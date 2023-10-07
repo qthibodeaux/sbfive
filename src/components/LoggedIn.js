@@ -1,10 +1,12 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Box, Image, Heading, Text, Button } from "grommet"
 import supabaseClient from "../supabaseClient"
 
 function LoggedIn() {
   const [info, setInfo] = useState([])
   const [loading, setLoading] = useState(false)
+  const [data, setData] = useState(null)
+  const filter = ['Hip Hop', 'Sports', 'News', 'Video Games']
 
   async function getData () {
     setLoading(true)
@@ -25,6 +27,31 @@ function LoggedIn() {
     }
   }
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data: postData, error: postError } = await supabaseClient
+            .from('hot')
+            .select(`
+              thre_id,
+              thre ( thread_title),
+              up ( name )
+            `)
+
+            setData(postData)
+            
+          if (postError) {
+            console.error('Error from supabase')
+            return;
+          }
+      } catch (error) {
+        console.error('Error', error.message)
+      }
+    }
+
+    fetchData()
+  }, [])
+
   return (
     <Box
         border
@@ -32,6 +59,24 @@ function LoggedIn() {
         Logged In
         <Box>
           New stuff
+
+          <Box>
+            {data 
+              ? <Box>
+                  {data.map((element, index) => (
+                    <Box
+                      key={index}
+                      direction="row"
+                    >
+                      <Box>{element.thre_id}</Box> |
+                      <Box>{element.thre.thread_title}</Box>
+                    </Box>
+                  ))}
+                </Box>
+              : <Box>Loading</Box>
+            }
+          </Box>
+          
           <Box
             direction='column'
             align="center"
