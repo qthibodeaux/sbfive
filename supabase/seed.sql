@@ -143,3 +143,15 @@ values
     (gen_random_uuid(), (select id from thre order by random() limit 1)),
     (gen_random_uuid(), (select id from thre order by random() limit 1)),
     (gen_random_uuid(), (select id from thre order by random() limit 1));
+
+INSERT INTO employees (id, employee_id, first_name, last_name, dept_id, manager_id, salary, expertise)
+VALUES
+    (gen_random_uuid(), 100, 'John', 'White', 'IT', 103, 120000, 'Senior'),
+    (gen_random_uuid(), 101, 'Mary', 'Danner', 'Account', 109, 80000, 'Junior'),
+    (gen_random_uuid(), 102, 'Ann', 'Lynn', 'Sales', 107, 140000, 'Semisenior'),
+    (gen_random_uuid(), 103, 'Peter', 'O''connor', 'IT', 110, 130000, 'Senior'),
+    (gen_random_uuid(), 106, 'Sue', 'Sanchez', 'Sales', 107, 110000, 'Junior'),
+    (gen_random_uuid(), 107, 'Marta', 'Doe', 'Sales', 110, 180000, 'Senior'),
+    (gen_random_uuid(), 109, 'Ann', 'Danner', 'Account', 110, 90000, 'Senior'),
+    (gen_random_uuid(), 110, 'Simon', 'Yang', 'CEO', NULL, 250000, 'Senior'),
+    (gen_random_uuid(), 111, 'Juan', 'Graue', 'Sales', 102, 37000, 'Junior');

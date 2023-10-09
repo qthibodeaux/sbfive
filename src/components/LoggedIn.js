@@ -31,11 +31,10 @@ function LoggedIn() {
     const fetchData = async () => {
       try {
         const { data: postData, error: postError } = await supabaseClient
-            .from('hot')
+            .from('thre')
             .select(`
-              thre_id,
-              thre ( thread_title),
-              up ( name )
+              hot ( thre_id ),
+              thread_title
             `)
 
             setData(postData)
@@ -68,8 +67,8 @@ function LoggedIn() {
                       key={index}
                       direction="row"
                     >
-                      <Box>{element.thre_id}</Box> |
-                      <Box>{element.thre.thread_title}</Box>
+                      <Box>{element.thread_title}</Box> |
+                      <Box>{element.hot.thre_id}</Box>
                     </Box>
                   ))}
                 </Box>

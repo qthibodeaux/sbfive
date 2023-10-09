@@ -51,6 +51,17 @@ create table hot (
   thre_id uuid not null references thre
 );
 
+create table employees (
+  id uuid primary key,
+  employee_id integer,
+  first_name text,
+  last_name text,
+  dept_id text,
+  manager_id integer,
+  salary integer,
+  expertise text
+);
+
 alter table user_profiles enable row level security;
 
 CREATE POLICY "all can see" ON "public"."user_profiles"
