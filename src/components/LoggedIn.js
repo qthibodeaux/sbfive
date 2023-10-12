@@ -31,14 +31,29 @@ function LoggedIn() {
     const fetchData = async () => {
       try {
         const { data: postData, error: postError } = await supabaseClient
-            .from('thre')
-            .select(`
-              hot ( thre_id ),
-              thread_title
+            .from('employees')
+            .sql(`
+              WITH employee_ranking AS (
+                SELECT
+                  employee_id,
+                  last_name,
+                  first_name,
+                  salary,
+                  RANK() OVER (ORDER BY salary DESC) as ranking
+                FROM employee
+              )
+              SELECT
+                employee_id,
+                last_name,
+                first_name,
+                salary
+              FROM employee_ranking
+              WHERE ranking <= 5
+              ORDER BY ranking
             `)
 
             setData(postData)
-            
+            console.log(data)
           if (postError) {
             console.error('Error from supabase')
             return;
@@ -67,8 +82,7 @@ function LoggedIn() {
                       key={index}
                       direction="row"
                     >
-                      <Box>{element.thread_title}</Box> |
-                      <Box>{element.hot.thre_id}</Box>
+                      <Box>{element.last_name}</Box>
                     </Box>
                   ))}
                 </Box>
