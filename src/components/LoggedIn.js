@@ -28,11 +28,12 @@ function LoggedIn() {
   }
 
   useEffect(() => {
-    const fetchData = async () => {a  a
+    const fetchData = async () => {
       try {
         const { data: postData, error: postError } = await supabaseClient
             .from('employees')
-            
+            .select('*, (SELECT COUNT(DISTINCT salary) FROM employees WHERE department = e.department AND salary >= e.salary) AS rank')
+  .order('department, rank');
 
             setData(postData)
             console.log(data)
