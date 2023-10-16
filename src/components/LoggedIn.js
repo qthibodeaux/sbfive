@@ -14,7 +14,15 @@ function LoggedIn() {
     try {
       const {data, error} = await supabaseClient
       .from('user_profiles')
-      .select('*')
+      .select(`
+        id,
+        thre ( 
+          id,
+          thread_title,
+          category_id,
+          up_id
+        )
+      `)
     if (error) {
       throw error
     }
@@ -31,9 +39,20 @@ function LoggedIn() {
     const fetchData = async () => {
       try {
         const { data: postData, error: postError } = await supabaseClient
-            .from('employees')
-            .select('*, (SELECT COUNT(DISTINCT salary) FROM employees WHERE department = e.department AND salary >= e.salary) AS rank')
-  .order('department, rank');
+            .from('hot')
+            .select(`
+              id,
+              thre ( 
+                id,
+                thread_title,
+                category_id,
+                up_id
+              ),
+              categories (
+                id,
+                name
+              )
+            `);
 
             setData(postData)
             console.log(data)
@@ -65,7 +84,8 @@ function LoggedIn() {
                       key={index}
                       direction="row"
                     >
-                      <Box>{element.last_name}</Box>
+                      <Box>{element.categories.name}</Box>
+                      <Box>{element.thre.thread_title}</Box>
                     </Box>
                   ))}
                 </Box>

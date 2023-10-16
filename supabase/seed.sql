@@ -6,6 +6,7 @@ values
     (gen_random_uuid(),'Video Games'),
     (gen_random_uuid(),'Music'),
     (gen_random_uuid(),'Books'),
+    (gen_random_uuid(),'Electronics'),
     (gen_random_uuid(),'Movies');
 
 
@@ -35,6 +36,20 @@ values
 
 insert into thre (id, thread_title, category_id, up_id, created_at, updated_at)
 values
+    (gen_random_uuid(), 'Who had the better album release 48 Strap Shawty or PXQ Insane', (select id from categories limit 1), (select id from up order by random() limit 1), TIMESTAMP '2023-09-28 00:00:00' + random() * (TIMESTAMP '2023-09-29 00:00:00' - TIMESTAMP '2023-09-28 00:00:00'), now()),
+    (gen_random_uuid(), 'So the Astros really not gonna win at home?', (select id from categories limit 1 offset 1), (select id from up order by random() limit 1), TIMESTAMP '2023-09-28 00:00:00' + random() * (TIMESTAMP '2023-09-29 00:00:00' - TIMESTAMP '2023-09-28 00:00:00'), now()),
+    (gen_random_uuid(), 'We need another stimmy Biden!', (select id from categories limit 1 offset 2), (select id from up order by random() limit 1), TIMESTAMP '2023-09-28 00:00:00' + random() * (TIMESTAMP '2023-09-29 00:00:00' - TIMESTAMP '2023-09-28 00:00:00'), now()),
+    (gen_random_uuid(), 'I am excited for the upcoming fall slate', (select id from categories limit 1 offset 3), (select id from up order by random() limit 1), TIMESTAMP '2023-09-28 00:00:00' + random() * (TIMESTAMP '2023-09-29 00:00:00' - TIMESTAMP '2023-09-28 00:00:00'), now()),
+    (gen_random_uuid(), 'This new Barrymore go hard!', (select id from categories limit 1 offset 4), (select id from up order by random() limit 1), TIMESTAMP '2023-09-28 00:00:00' + random() * (TIMESTAMP '2023-09-29 00:00:00' - TIMESTAMP '2023-09-28 00:00:00'), now()),
+    (gen_random_uuid(), 'I have thoughts on Bemani Jacket book!', (select id from categories limit 1 offset 5), (select id from up order by random() limit 1), TIMESTAMP '2023-09-28 00:00:00' + random() * (TIMESTAMP '2023-09-29 00:00:00' - TIMESTAMP '2023-09-28 00:00:00'), now()),
+    (gen_random_uuid(), 'The new xPhone is just a copy of the PlayPhone!', (select id from categories limit 1 offset 6), (select id from up order by random() limit 1), TIMESTAMP '2023-09-28 00:00:00' + random() * (TIMESTAMP '2023-09-29 00:00:00' - TIMESTAMP '2023-09-28 00:00:00'), now()),
+    (gen_random_uuid(), 'I am ready for Gunns DCU', (select id from categories limit 1 offset 7), (select id from up order by random() limit 1), TIMESTAMP '2023-09-28 00:00:00' + random() * (TIMESTAMP '2023-09-29 00:00:00' - TIMESTAMP '2023-09-28 00:00:00'), now()),
+    (gen_random_uuid(), 'Capcom plans to release one unannounced game, which would sell millions, by March next year', (select id from categories order by random() limit 1), (select id from up order by random() limit 1), TIMESTAMP '2023-09-28 00:00:00' + random() * (TIMESTAMP '2023-09-29 00:00:00' - TIMESTAMP '2023-09-28 00:00:00'), now()),
+    (gen_random_uuid(), 'Valve teases Counter-Strike 2 launch (September 27, 2023)', (select id from categories order by random() limit 1), (select id from up order by random() limit 1), TIMESTAMP '2023-09-28 00:00:00' + random() * (TIMESTAMP '2023-09-29 00:00:00' - TIMESTAMP '2023-09-28 00:00:00'), now()),
+    (gen_random_uuid(), 'Do you believe in ludonarrative?', (select id from categories order by random() limit 1), (select id from up order by random() limit 1), TIMESTAMP '2023-09-28 00:00:00' + random() * (TIMESTAMP '2023-09-29 00:00:00' - TIMESTAMP '2023-09-28 00:00:00'), now()),
+    (gen_random_uuid(), 'Ace Attorney Trilogy will join Game Pass on September 26', (select id from categories order by random() limit 1), (select id from up order by random() limit 1), TIMESTAMP '2023-09-28 00:00:00' + random() * (TIMESTAMP '2023-09-29 00:00:00' - TIMESTAMP '2023-09-28 00:00:00'), now()),
+    (gen_random_uuid(), 'Final Fantasy VII Rebirth Hands-On Preview Thread', (select id from categories order by random() limit 1), (select id from up order by random() limit 1), TIMESTAMP '2023-09-28 00:00:00' + random() * (TIMESTAMP '2023-09-29 00:00:00' - TIMESTAMP '2023-09-28 00:00:00'), now()),
+    (gen_random_uuid(), 'Square Enix announces Final Fantasy XIV Tabletop RPG, releasing May 2024 for $59.99', (select id from categories order by random() limit 1), (select id from up order by random() limit 1), TIMESTAMP '2023-09-28 00:00:00' + random() * (TIMESTAMP '2023-09-29 00:00:00' - TIMESTAMP '2023-09-28 00:00:00'), now()),
     (gen_random_uuid(), 'Whats your favorite mindless comfort game?', (select id from categories order by random() limit 1), (select id from up order by random() limit 1), TIMESTAMP '2023-09-28 00:00:00' + random() * (TIMESTAMP '2023-09-29 00:00:00' - TIMESTAMP '2023-09-28 00:00:00'), now()),
     (gen_random_uuid(), 'Mortal Kombat 1 - Review Thread', (select id from categories order by random() limit 1), (select id from up order by random() limit 1), TIMESTAMP '2023-09-28 00:00:00' + random() * (TIMESTAMP '2023-09-29 00:00:00' - TIMESTAMP '2023-09-28 00:00:00'), now()),
     (gen_random_uuid(), 'Capcom plans to release one unannounced game, which would sell millions, by March next year', (select id from categories order by random() limit 1), (select id from up order by random() limit 1), TIMESTAMP '2023-09-28 00:00:00' + random() * (TIMESTAMP '2023-09-29 00:00:00' - TIMESTAMP '2023-09-28 00:00:00'), now()),
@@ -135,23 +150,11 @@ values
 
 insert into hot (id, thre_id)
 values
-    (gen_random_uuid(), (select id from thre order by random() limit 1)),
-    (gen_random_uuid(), (select id from thre order by random() limit 1)),
-    (gen_random_uuid(), (select id from thre order by random() limit 1)),
-    (gen_random_uuid(), (select id from thre order by random() limit 1)),
-    (gen_random_uuid(), (select id from thre order by random() limit 1)),
-    (gen_random_uuid(), (select id from thre order by random() limit 1)),
-    (gen_random_uuid(), (select id from thre order by random() limit 1)),
-    (gen_random_uuid(), (select id from thre order by random() limit 1));
-
-INSERT INTO employees (id, employee_id, first_name, last_name, dept_id, manager_id, salary, expertise)
-VALUES
-    (gen_random_uuid(), 100, 'John', 'White', 'IT', 103, 120000, 'Senior'),
-    (gen_random_uuid(), 101, 'Mary', 'Danner', 'Account', 109, 80000, 'Junior'),
-    (gen_random_uuid(), 102, 'Ann', 'Lynn', 'Sales', 107, 140000, 'Semisenior'),
-    (gen_random_uuid(), 103, 'Peter', 'O''connor', 'IT', 110, 130000, 'Senior'),
-    (gen_random_uuid(), 106, 'Sue', 'Sanchez', 'Sales', 107, 110000, 'Junior'),
-    (gen_random_uuid(), 107, 'Marta', 'Doe', 'Sales', 110, 180000, 'Senior'),
-    (gen_random_uuid(), 109, 'Ann', 'Danner', 'Account', 110, 90000, 'Senior'),
-    (gen_random_uuid(), 110, 'Simon', 'Yang', 'CEO', NULL, 250000, 'Senior'),
-    (gen_random_uuid(), 111, 'Juan', 'Graue', 'Sales', 102, 37000, 'Junior');
+    (gen_random_uuid(), (select id from thre limit 1)),
+    (gen_random_uuid(), (select id from thre limit 1 offset 1)),
+    (gen_random_uuid(), (select id from thre limit 1 offset 2)),
+    (gen_random_uuid(), (select id from thre limit 1 offset 3)),
+    (gen_random_uuid(), (select id from thre limit 1 offset 4)),
+    (gen_random_uuid(), (select id from thre limit 1 offset 5)),
+    (gen_random_uuid(), (select id from thre limit 1 offset 6)),
+    (gen_random_uuid(), (select id from thre limit 1 offset 7));
