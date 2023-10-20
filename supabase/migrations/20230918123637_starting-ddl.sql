@@ -48,7 +48,8 @@ create table posts (
 
 create table hot (
   id uuid primary key,
-  thre_id uuid not null references thre
+  thre_id uuid not null references thre,
+  category_id uuid not null references categories
 );
 
 create table employees (
