@@ -6,6 +6,7 @@ function LoggedIn() {
   const [info, setInfo] = useState([])
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState(null)
+  const [jsonData, setJsonData] = useState(null)
   const filter = ['Hip Hop', 'Sports', 'News', 'Video Games']
 
   async function getData () {
@@ -55,7 +56,7 @@ function LoggedIn() {
             `);
 
             setData(postData)
-            console.log(data)
+            setJsonData(postData)
           if (postError) {
             console.error('Error from supabase')
             return;
@@ -67,6 +68,16 @@ function LoggedIn() {
 
     fetchData()
   }, [])
+
+  const ordered = ['Hip Hop', 'Sports', 'Video Games', 'Music', 'News', 'Movies', 'Books', 'Electronics', 'Books']
+
+  const sortData = data
+    ? [...data].sort((a, b) => {
+      const indexA = ordered.indexOf(a.categories.name)
+      const indexB = ordered.indexOf(b.categories.name)
+      return indexA - indexB
+    })
+    : [];
 
   return (
     <Box
@@ -88,6 +99,19 @@ function LoggedIn() {
                       <Box>{element.thre.thread_title}</Box>
                     </Box>
                   ))}
+                   <h1>JSON Data from Supabase</h1>
+                   <pre>{JSON.stringify(jsonData, null, 2)}</pre>
+                   <div>
+                    <h1>Sorted JSON Data from Supabase</h1>
+                    <ul>
+                      {sortData.map((item, value) => (
+                        <li key={value}>{item.categories.name}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <Box>
+                        
+                  </Box>
                 </Box>
               : <Box>Loading</Box>
             }
