@@ -24,8 +24,9 @@ create table threads (
   thread_title text unique not null,
   category_id uuid not null references categories,
   user_id uuid not null references user_profiles,
-  created_at timestamp not null
-  
+  created_at timestamp not null,
+  updated_at timestamp,
+  post_count integer
 );
 
 create table thre (
@@ -34,7 +35,8 @@ create table thre (
   category_id uuid not null references categories,
   up_id uuid not null references up,
   created_at timestamp not null,
-  updated_at timestamp
+  updated_at timestamp,
+  post_count integer
 );
 
 create table posts (

@@ -6,6 +6,38 @@ import supabaseClient from '../supabaseClient'
 
 function Category() {
     const { category } = useParams()
+    const [loading, setLoading] = useState(false)
+    const [data, setData] = useState(null)
+    const [jsonData, setJsonData] = useState(null)
+
+    const filterSet = ['Hip Hop', 'Sports']
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const { data: postData, error: postError } = await supabaseClient
+                .from('thre')
+                .select(`
+                    category_id,
+                    categories ( id, name )
+                `)
+                .eq('categories.name', 'Music')
+
+                setData(postData)
+                setJsonData(postData)
+
+                if (postError) {
+                    console.error('Error from supabase')
+                    return;
+                  }
+            } catch (error) {
+                console.error('Error', error.message)
+            }
+        }
+
+        fetchData()
+    }, [])
 
   return (
     <Box
@@ -24,6 +56,9 @@ function Category() {
                 direction='column'
                 border
             >
+                    <h1>JSON Data from Supabase</h1>
+                   <pre>{JSON.stringify(jsonData, null, 2)}</pre>
+                   
                 <Box>
                     Sticky Threads
                     <ThreadRowOG />
