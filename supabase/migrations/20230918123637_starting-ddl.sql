@@ -22,7 +22,7 @@ create table categories (
 create table threads (
   id uuid primary key,
   thread_title text unique not null,
-  category_id uuid not null references categories,
+  category_name text not null references categories,
   user_id uuid not null references user_profiles,
   created_at timestamp not null,
   updated_at timestamp,
@@ -32,7 +32,7 @@ create table threads (
 create table thre (
   id uuid primary key,
   thread_title text not null,
-  category_id uuid not null references categories,
+  category_name text not null references categories,
   up_id uuid not null references up,
   created_at timestamp not null,
   updated_at timestamp,
@@ -50,8 +50,7 @@ create table posts (
 
 create table hot (
   id uuid primary key,
-  thre_id uuid not null references thre,
-  category_id uuid not null references categories
+  thre_id uuid not null references thre
 );
 
 create table employees (
